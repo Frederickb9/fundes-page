@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-ivory text-charcoal font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  .gold-divider {
+    @apply w-16 h-px bg-gold-gradient mx-auto my-4;
+  }
+
+  .gold-divider-left {
+    @apply w-16 h-px bg-gold-gradient my-4;
+  }
+
+  .btn-gold {
+    @apply bg-gold-gradient text-white font-sans font-semibold px-8 py-3 rounded-none
+           tracking-widest uppercase text-xs
+           transition-all duration-300
+           hover:shadow-gold-lg hover:scale-105;
+  }
+
+  .btn-outline-gold {
+    @apply border border-gold text-gold font-sans font-semibold px-8 py-3 rounded-none
+           tracking-widest uppercase text-xs
+           transition-all duration-300
+           hover:bg-gold hover:text-white;
+  }
+
+  .section-tag {
+    @apply font-sans text-gold tracking-[0.3em] uppercase text-xs font-semibold;
+  }
+
+  .section-title {
+    @apply font-display text-4xl md:text-5xl text-charcoal leading-tight;
+  }
+
+  .section-subtitle {
+    @apply font-sans text-slate-warm text-base md:text-lg leading-relaxed max-w-2xl;
+  }
+
+  .card-elegant {
+    @apply bg-white border border-ivory-dark rounded-none
+           shadow-elegant transition-all duration-500 overflow-hidden;
+  }
+}
+
+@layer utilities {
+  .text-shadow-sm {
+    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  }
+  .text-shadow-lg {
+    text-shadow: 0 2px 16px rgba(0,0,0,0.5);
+  }
+}
+
+/* Gold ornament */
+.ornament {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #C9963C;
+}
+.ornament::before, .ornament::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #C9963C, transparent);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #F8F5EE; }
+::-webkit-scrollbar-thumb { background: #C9963C; border-radius: 3px; }
