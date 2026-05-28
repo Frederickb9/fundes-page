@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion, useScroll } from 'framer-motion';
+import { motion, AnimatePresence, useScroll } from 'framer-motion';
 import { Menu, X, Phone } from 'lucide-react';
 
 const navLinks = [
@@ -20,6 +20,13 @@ export default function Navbar() {
     return unsub;
   }, [scrollY]);
 
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
+
+  const navScrolled = scrolled && !menuOpen;
+
   return (
     <>
       <motion.nav
@@ -27,7 +34,7 @@ export default function Navbar() {
         animate={{ y: 0 }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,backdrop-filter,box-shadow,border-color] duration-300 ${
-          scrolled || menuOpen
+          navScrolled
             ? 'bg-white/96 backdrop-blur-md shadow-elegant border-b border-ivory-dark'
             : 'bg-transparent'
         }`}
@@ -38,24 +45,27 @@ export default function Navbar() {
             {/* Logo */}
             <motion.a href="#inicio" className="flex items-center gap-3 group" whileHover={{ scale: 1.01 }}>
               <div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center relative">
-                {/* Halo blanco detrás del logo cuando está sobre el Hero oscuro */}
-                {!scrolled && !menuOpen && (
+                {!navScrolled && (
                   <div className="absolute inset-0 rounded-full bg-white/15 blur-sm" />
                 )}
                 <img
                   src="/logo.png"
                   alt="Funerales Nueva Divino El Salvador"
                   className={`w-full h-full object-contain relative z-10 transition-[filter] duration-300 ${
-                    scrolled || menuOpen ? 'brightness-75 contrast-110' : 'brightness-110'
+                    navScrolled ? 'brightness-75 contrast-110' : 'brightness-110'
                   }`}
                   onError={(e) => { e.target.style.display = 'none'; }}
                 />
               </div>
               <div className="hidden md:block">
-                <p className={`font-display text-lg leading-tight font-semibold transition-colors duration-300 ${scrolled || menuOpen ? 'text-charcoal' : 'text-white drop-shadow'}`}>
+                <p className={`font-display text-lg leading-tight font-semibold transition-colors duration-300 ${
+                  navScrolled ? 'text-charcoal' : 'text-white drop-shadow'
+                }`}>
                   Funerales Nueva Divino
                 </p>
-                <p className={`font-sans text-xs tracking-[0.2em] uppercase transition-colors duration-300 ${scrolled || menuOpen ? 'text-gold' : 'text-gold-light drop-shadow'}`}>
+                <p className={`font-sans text-xs tracking-[0.2em] uppercase transition-colors duration-300 ${
+                  navScrolled ? 'text-gold' : 'text-gold-light drop-shadow'
+                }`}>
                   El Salvador
                 </p>
               </div>
@@ -67,8 +77,8 @@ export default function Navbar() {
                 <motion.a
                   key={link.href}
                   href={link.href}
-                  className={`font-sans text-xs tracking-[0.15em] uppercase font-semibold transition-colors duration-300 relative group ${
-                    scrolled ? 'text-charcoal hover:text-gold' : 'text-white/90 hover:text-gold-light drop-shadow'
+                  className={`font-sans text-xs tracking-[0.15em] uppercase font-semibold transition-[color] duration-150 relative group ${
+                    navScrolled ? 'text-charcoal hover:text-gold' : 'text-white/90 hover:text-gold-light drop-shadow'
                   }`}
                   whileHover={{ y: -1 }}
                 >
@@ -87,12 +97,18 @@ export default function Navbar() {
               </motion.a>
             </div>
 
-            {/* Mobile Menu Btn */}
+            {/* Mobile — botón hamburguesa/X siempre blanco (overlay oscuro detrás) */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className={`md:hidden p-3 transition-colors ${scrolled || menuOpen ? 'text-charcoal' : 'text-white'}`}
+              aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+              className={`md:hidden p-3 transition-[color] duration-150 ${
+                navScrolled ? 'text-charcoal' : 'text-white'
+              }`}
             >
-              <motion.div animate={{ rotate: menuOpen ? 90 : 0 }} transition={{ duration: 0.2 }}>
+              <motion.div
+                animate={{ rotate: menuOpen ? 45 : 0, scale: menuOpen ? 1.1 : 1 }}
+                transition={{ duration: 0.2 }}
+              >
                 {menuOpen ? <X size={22} /> : <Menu size={22} />}
               </motion.div>
             </button>
@@ -100,39 +116,63 @@ export default function Navbar() {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
-      <motion.div
-        initial={false}
-        animate={menuOpen ? { opacity: 1, y: 0, pointerEvents: 'all' } : { opacity: 0, y: -16, pointerEvents: 'none' }}
-        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-20 left-0 right-0 z-40 bg-white/98 backdrop-blur-xl border-b border-ivory-dark shadow-elegant-lg md:hidden"
-      >
-        <div className="max-w-7xl mx-auto px-5 py-8 flex flex-col gap-6">
-          {navLinks.map((link, i) => (
-            <motion.a
-              key={link.href}
-              href={link.href}
-              onClick={() => setMenuOpen(false)}
-              initial={{ opacity: 0, x: -16 }}
-              animate={menuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
-              transition={{ delay: i * 0.05, duration: 0.3 }}
-              className="font-sans text-sm tracking-[0.15em] uppercase font-semibold text-charcoal hover:text-gold transition-colors py-3 border-b border-ivory-dark"
-            >
-              {link.label}
-            </motion.a>
-          ))}
-          <motion.a
-            href="tel:+50374779220"
-            className="btn-gold self-start flex items-center gap-2"
+      {/* Overlay full-screen — navy oscuro, debajo del nav */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            key="mobile-menu"
             initial={{ opacity: 0 }}
-            animate={menuOpen ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ delay: 0.3 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-40 bg-navy/[0.97] backdrop-blur-sm flex flex-col md:hidden"
           >
-            <Phone size={13} />
-            Llamar Ahora
-          </motion.a>
-        </div>
-      </motion.div>
+            {/* Línea dorada superior */}
+            <div className="absolute top-0 left-0 right-0 h-0.5 bg-gold-gradient opacity-80" />
+
+            {/* Espacio para el navbar */}
+            <div className="h-20" />
+
+            {/* Links principales */}
+            <nav className="flex-1 flex flex-col justify-center px-8 gap-0">
+              {navLinks.map((link, i) => (
+                <motion.a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.07 + 0.05, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  className="font-display text-3xl text-white/85 hover:text-gold-light transition-[color] duration-150 py-4 border-b border-white/[0.08] leading-tight"
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {link.label}
+                </motion.a>
+              ))}
+            </nav>
+
+            {/* Pie del overlay: teléfono + tagline */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.45, duration: 0.4 }}
+              className="px-8 pb-12 flex flex-col gap-3"
+            >
+              <div className="h-px bg-white/10 mb-2" />
+              <a
+                href="tel:+50374779220"
+                className="flex items-center gap-3 text-gold-light font-sans text-sm tracking-wider"
+              >
+                <Phone size={14} />
+                7477-9220 / 6174-2807
+              </a>
+              <p className="font-sans text-white/30 text-[10px] tracking-[0.25em] uppercase">
+                Desde 1979 · La Unión, El Salvador
+              </p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
