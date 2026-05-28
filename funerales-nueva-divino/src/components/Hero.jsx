@@ -83,7 +83,7 @@ export default function Hero() {
           className="font-display text-4xl md:text-6xl lg:text-7xl text-white leading-[1.1] mb-4 text-shadow-lg"
           style={{ fontWeight: 300, letterSpacing: '-0.01em' }}>
           En los momentos{' '}
-          <em className="text-gold-light not-italic" style={{ fontStyle: 'italic', fontWeight: 500 }}>
+          <em className="text-gold-light" style={{ fontStyle: 'italic', fontWeight: 500 }}>
             más difíciles,
           </em>
           <br />estamos para ti.

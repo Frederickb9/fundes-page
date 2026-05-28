@@ -71,11 +71,10 @@ function ServiceCard({ service }) {
       variants={cardVariants}
       whileHover={{
         y: -8,
-        boxShadow: '0 20px 60px rgba(201,150,60,0.18), 0 4px 20px rgba(15,23,42,0.12)',
         transition: { type: 'spring', stiffness: 300, damping: 20 },
       }}
       whileTap={{ scale: 0.98, transition: { duration: 0.1 } }}
-      className="card-elegant group cursor-default"
+      className="card-elegant group cursor-default hover:shadow-gold-md transition-[box-shadow] duration-300"
     >
       <div className="h-0.5 bg-gold-gradient w-full transform scale-x-0 group-hover:scale-x-100 transition-[transform] duration-200 origin-left" />
       <div className="p-8 md:p-10">
@@ -127,7 +126,7 @@ export default function Services() {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? 'show' : 'hidden'}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {services.map((service) => (
             <ServiceCard key={service.title} service={service} />
           ))}

@@ -173,8 +173,8 @@ export default function About() {
                 initial={{ opacity: 0, y: 28 }}
                 animate={isValInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: i * 0.08, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ y: -5, boxShadow: '0 16px 48px rgba(201,150,60,0.15)', transition: { type: 'spring', stiffness: 320, damping: 22 } }}
-                className="bg-white border border-ivory-dark p-8 group">
+                whileHover={{ y: -5, transition: { type: 'spring', stiffness: 320, damping: 22 } }}
+                className="bg-white border border-ivory-dark p-8 group hover:shadow-gold-sm transition-[box-shadow] duration-300">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="font-display text-4xl text-gold/20 font-semibold leading-none">{v.num}</span>
                   <h4 className="font-display text-xl text-charcoal group-hover:text-gold transition-colors duration-300" style={{ fontWeight: 500 }}>

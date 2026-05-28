@@ -147,14 +147,13 @@ function PlanCard({ plan }) {
       }}
       whileHover={{
         y: -6,
-        boxShadow: plan.featured
-          ? `0 20px 60px rgba(201,150,60,0.35), 0 4px 20px rgba(15,23,42,0.15)`
-          : '0 16px 48px rgba(15,23,42,0.14)',
         transition: { type: 'spring', stiffness: 350, damping: 22 },
       }}
       whileTap={{ scale: 0.98, transition: { duration: 0.1 } }}
-      className={`relative bg-white overflow-hidden flex flex-col ${
-        plan.featured ? 'ring-1 ring-gold' : 'border border-ivory-dark'
+      className={`relative bg-white overflow-hidden flex flex-col transition-[box-shadow] duration-300 ${
+        plan.featured
+          ? 'ring-1 ring-gold hover:shadow-gold-lg'
+          : 'border border-ivory-dark hover:shadow-elegant-lg'
       }`}
     >
       {/* Badge */}
@@ -219,7 +218,7 @@ function PlanCard({ plan }) {
       {/* CTA */}
       <div className="mt-auto px-7 pb-7">
         <motion.a
-          href="https://wa.me/50300000000"
+          href="https://wa.me/50374779220?text=Hola,%20deseo%20información%20sobre%20sus%20planes%20funerarios."
           target="_blank"
           rel="noopener noreferrer"
           className="block w-full text-center font-sans text-[10px] tracking-[0.2em] uppercase font-semibold py-3 transition-[opacity] duration-150"
@@ -340,7 +339,7 @@ export default function MobileCatalog() {
               el plan que mejor se adapte a sus necesidades y presupuesto.
             </p>
             <motion.a
-              href="https://wa.me/50300000000"
+              href="https://wa.me/50374779220?text=Hola,%20deseo%20información%20sobre%20sus%20planes%20funerarios."
               target="_blank"
               rel="noopener noreferrer"
               className="btn-gold inline-flex items-center gap-2"
