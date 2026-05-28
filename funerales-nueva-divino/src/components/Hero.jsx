@@ -1,5 +1,29 @@
-import { motion } from 'framer-motion';
+import { useRef, useEffect } from 'react';
+import { motion, useMotionValue, useTransform, animate, useInView } from 'framer-motion';
 import { Phone, ChevronDown } from 'lucide-react';
+
+function Counter({ to, suffix = '', delay = 0 }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, Math.round);
+
+  useEffect(() => {
+    if (!isInView) return;
+    const controls = animate(count, to, {
+      duration: 1.8,
+      delay,
+      ease: [0.16, 1, 0.3, 1],
+    });
+    return controls.stop;
+  }, [isInView, count, to, delay]);
+
+  return (
+    <span ref={ref}>
+      <motion.span>{rounded}</motion.span>{suffix}
+    </span>
+  );
+}
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -80,12 +104,14 @@ export default function Hero() {
           transition={{ delay: 0.55, duration: 0.5 }}
           className="flex gap-10 md:gap-16 mt-20 border-t border-white/10 pt-10">
           {[
-            { value: '40+', label: 'Años de Experiencia' },
-            { value: '24/7', label: 'Atención Disponible' },
-            { value: '100%', label: 'Compromiso Familiar' },
+            { to: 40, suffix: '+', label: 'Años de Experiencia', delay: 0.6 },
+            { to: 24, suffix: '/7', label: 'Atención Disponible', delay: 0.75 },
+            { to: 100, suffix: '%', label: 'Compromiso Familiar', delay: 0.9 },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
-              <p className="font-display text-2xl md:text-3xl text-gold-light font-semibold">{stat.value}</p>
+              <p className="font-display text-2xl md:text-3xl text-gold-light font-semibold">
+                <Counter to={stat.to} suffix={stat.suffix} delay={stat.delay} />
+              </p>
               <p className="font-sans text-white/50 text-xs tracking-wider mt-1 uppercase">{stat.label}</p>
             </div>
           ))}
