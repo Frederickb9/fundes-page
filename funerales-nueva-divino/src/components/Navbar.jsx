@@ -25,8 +25,8 @@ export default function Navbar() {
       <motion.nav
         initial={{ y: -80 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,backdrop-filter,box-shadow,border-color] duration-300 ${
           scrolled
             ? 'bg-white/96 backdrop-blur-md shadow-elegant border-b border-ivory-dark'
             : 'bg-transparent'
@@ -45,7 +45,7 @@ export default function Navbar() {
                 <img
                   src="/logo.png"
                   alt="Funerales Nueva Divino El Salvador"
-                  className={`w-full h-full object-contain relative z-10 transition-all duration-500 ${
+                  className={`w-full h-full object-contain relative z-10 transition-[filter] duration-300 ${
                     scrolled ? 'brightness-75 contrast-110' : 'brightness-110'
                   }`}
                   onError={(e) => { e.target.style.display = 'none'; }}
@@ -73,7 +73,7 @@ export default function Navbar() {
                   whileHover={{ y: -1 }}
                 >
                   {link.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold transition-all duration-300 group-hover:w-full" />
+                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-gold transition-[width] duration-300 group-hover:w-full" />
                 </motion.a>
               ))}
               <motion.a
@@ -90,7 +90,7 @@ export default function Navbar() {
             {/* Mobile Menu Btn */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className={`md:hidden p-2 transition-colors ${scrolled ? 'text-charcoal' : 'text-white'}`}
+              className={`md:hidden p-3 transition-colors ${scrolled ? 'text-charcoal' : 'text-white'}`}
             >
               <motion.div animate={{ rotate: menuOpen ? 90 : 0 }} transition={{ duration: 0.2 }}>
                 {menuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -116,7 +116,7 @@ export default function Navbar() {
               initial={{ opacity: 0, x: -16 }}
               animate={menuOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -16 }}
               transition={{ delay: i * 0.05, duration: 0.3 }}
-              className="font-sans text-sm tracking-[0.15em] uppercase font-semibold text-charcoal hover:text-gold transition-colors py-2 border-b border-ivory-dark"
+              className="font-sans text-sm tracking-[0.15em] uppercase font-semibold text-charcoal hover:text-gold transition-colors py-3 border-b border-ivory-dark"
             >
               {link.label}
             </motion.a>

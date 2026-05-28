@@ -137,9 +137,9 @@ function PlanCard({ plan }) {
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, scale: 0.88 }}
+      initial={{ opacity: 0, scale: 0.96 }}
       animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.88, transition: { duration: 0.2 } }}
+      exit={{ opacity: 0, scale: 0.96, transition: { duration: 0.2 } }}
       transition={{
         layout: { type: 'spring', stiffness: 280, damping: 28 },
         opacity: { duration: 0.35, ease: 'easeOut' },
@@ -152,6 +152,7 @@ function PlanCard({ plan }) {
           : '0 16px 48px rgba(15,23,42,0.14)',
         transition: { type: 'spring', stiffness: 350, damping: 22 },
       }}
+      whileTap={{ scale: 0.98, transition: { duration: 0.1 } }}
       className={`relative bg-white overflow-hidden flex flex-col ${
         plan.featured ? 'ring-1 ring-gold' : 'border border-ivory-dark'
       }`}
@@ -221,7 +222,7 @@ function PlanCard({ plan }) {
           href="https://wa.me/50300000000"
           target="_blank"
           rel="noopener noreferrer"
-          className="block w-full text-center font-sans text-[10px] tracking-[0.2em] uppercase font-semibold py-3 transition-all duration-300"
+          className="block w-full text-center font-sans text-[10px] tracking-[0.2em] uppercase font-semibold py-3 transition-[opacity] duration-150"
           style={{
             background: plan.featured ? `linear-gradient(135deg, ${plan.color}, #D4AF37)` : 'transparent',
             color: plan.featured ? '#fff' : plan.color,
@@ -250,7 +251,7 @@ export default function MobileCatalog() {
     : plans.filter((p) => p.category === activeFilter);
 
   return (
-    <section id="planes" className="py-24 md:py-32 bg-white">
+    <section id="planes" className="py-16 md:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-5 md:px-10">
         {/* Header */}
         <motion.div
@@ -286,7 +287,7 @@ export default function MobileCatalog() {
             <motion.button
               key={cat.id}
               onClick={() => setActiveFilter(cat.id)}
-              className={`relative font-sans text-xs tracking-[0.15em] uppercase font-semibold px-5 py-2.5 transition-all duration-300 overflow-hidden ${
+              className={`relative font-sans text-xs tracking-[0.15em] uppercase font-semibold px-5 py-2.5 transition-[border-color,color] duration-150 overflow-hidden ${
                 activeFilter === cat.id
                   ? 'text-white'
                   : 'text-slate-warm border border-ivory-dark hover:border-gold/50 hover:text-gold bg-white'

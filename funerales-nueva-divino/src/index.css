@@ -31,14 +31,14 @@
   .btn-gold {
     @apply bg-gold-gradient text-white font-sans font-semibold px-8 py-3 rounded-none
            tracking-widest uppercase text-xs
-           transition-all duration-300
+           transition-[box-shadow,transform] duration-200
            hover:shadow-gold-lg hover:scale-105;
   }
 
   .btn-outline-gold {
     @apply border border-gold text-gold font-sans font-semibold px-8 py-3 rounded-none
            tracking-widest uppercase text-xs
-           transition-all duration-300
+           transition-[background-color,color] duration-200
            hover:bg-gold hover:text-white;
   }
 
@@ -56,7 +56,7 @@
 
   .card-elegant {
     @apply bg-white border border-ivory-dark rounded-none
-           shadow-elegant transition-all duration-500 overflow-hidden;
+           shadow-elegant transition-[box-shadow,border-color] duration-200 overflow-hidden;
   }
 }
 

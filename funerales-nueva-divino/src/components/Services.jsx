@@ -74,14 +74,15 @@ function ServiceCard({ service }) {
         boxShadow: '0 20px 60px rgba(201,150,60,0.18), 0 4px 20px rgba(15,23,42,0.12)',
         transition: { type: 'spring', stiffness: 300, damping: 20 },
       }}
+      whileTap={{ scale: 0.98, transition: { duration: 0.1 } }}
       className="card-elegant group cursor-default"
     >
-      <div className="h-0.5 bg-gold-gradient w-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+      <div className="h-0.5 bg-gold-gradient w-full transform scale-x-0 group-hover:scale-x-100 transition-[transform] duration-200 origin-left" />
       <div className="p-8 md:p-10">
-        <div className="w-12 h-12 flex items-center justify-center border border-gold/30 bg-gold/5 mb-6 group-hover:bg-gold/10 transition-colors duration-300">
+        <div className="w-12 h-12 flex items-center justify-center border border-gold/30 bg-gold/5 mb-6 group-hover:bg-gold/10 transition-[background-color] duration-150">
           <Icon size={20} className="text-gold" strokeWidth={1.5} />
         </div>
-        <h3 className="font-display text-xl text-charcoal mb-3 group-hover:text-gold transition-colors duration-300">
+        <h3 className="font-display text-xl text-charcoal mb-3 group-hover:text-gold transition-[color] duration-150">
           {service.title}
         </h3>
         <p className="font-sans text-slate-warm text-sm leading-relaxed mb-6">{service.description}</p>
@@ -103,7 +104,7 @@ export default function Services() {
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="servicios" className="py-24 md:py-32 bg-ivory">
+    <section id="servicios" className="py-16 md:py-24 bg-ivory">
       <div className="max-w-7xl mx-auto px-5 md:px-10">
         <motion.div ref={ref}
           initial={{ opacity: 0, y: 24 }}

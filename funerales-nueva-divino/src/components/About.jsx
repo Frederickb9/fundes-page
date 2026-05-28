@@ -22,15 +22,15 @@ export default function About() {
   return (
     <>
       {/* ── Quiénes Somos ── */}
-      <section id="nosotros" className="py-24 md:py-32 bg-ivory relative overflow-hidden">
+      <section id="nosotros" className="py-16 md:py-24 bg-ivory relative overflow-hidden">
         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-80 h-80 opacity-5 pointer-events-none"
           style={{ background: 'radial-gradient(circle, #C9963C 0%, transparent 70%)' }} />
 
         <div className="max-w-7xl mx-auto px-5 md:px-10">
-          <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-center">
+          <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
             <motion.div ref={ref}
-              initial={{ opacity: 0, x: -32 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              initial={{ opacity: 0, y: 24 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}>
               <p className="section-tag mb-4">Nuestra Historia</p>
               <h2 className="font-display text-4xl md:text-5xl text-charcoal leading-tight mb-4" style={{ fontWeight: 400 }}>
@@ -38,18 +38,18 @@ export default function About() {
                 <em className="text-gold" style={{ fontStyle: 'italic', fontWeight: 500 }}>siempre cerca de ti</em>
               </h2>
               <div className="gold-divider-left" />
-              <p className="font-sans text-slate-warm text-base leading-relaxed mt-4 mb-4">
+              <p className="font-sans text-slate-warm text-sm leading-relaxed mt-4 mb-4">
                 Desde 1979, Funerales Nueva Divino El Salvador nació en La Unión con fe
                 profunda y vocación de servicio para acompañar a las familias salvadoreñas
                 en los momentos más difíciles.
               </p>
-              <p className="font-sans text-slate-warm text-base leading-relaxed mb-4">
+              <p className="font-sans text-slate-warm text-sm leading-relaxed mb-4">
                 Con más de <strong className="text-charcoal">40 años de experiencia</strong>, somos
                 la empresa funeraria de mayor confianza en el oriente del país. Brindamos
                 servicios funerarios económicos y de lujo, adaptados a las necesidades y
                 posibilidades de cada familia unionense.
               </p>
-              <p className="font-sans text-slate-warm text-base leading-relaxed mb-8">
+              <p className="font-sans text-slate-warm text-sm leading-relaxed mb-8">
                 Nuestra sede está ubicada en la <strong className="text-charcoal">5ª Av. Sur, Barrio El Centro,
                 La Unión, El Salvador</strong> y estamos disponibles las 24 horas, los 365 días del año.
               </p>
@@ -66,8 +66,8 @@ export default function About() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 32 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              initial={{ opacity: 0, y: 24 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
               className="grid grid-cols-2 gap-5">
               {[
@@ -97,7 +97,7 @@ export default function About() {
       </section>
 
       {/* ── Misión y Visión ── */}
-      <section className="py-24 md:py-28 bg-navy relative overflow-hidden">
+      <section className="py-16 md:py-24 bg-navy relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C9963C' fill-opacity='1'%3E%3Cpath d='M20 18v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4z'/%3E%3C/g%3E%3C/svg%3E")` }} />
         <div className="h-0.5 bg-gold-gradient absolute top-0 left-0 right-0" />
@@ -136,12 +136,12 @@ export default function About() {
                   initial={{ opacity: 0, y: 28 }}
                   animate={isMVInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: item.delay, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                  className="bg-white/5 border border-white/10 p-10 group hover:border-gold/40 transition-all duration-300">
+                  className="bg-white/5 border border-white/10 p-10 group hover:border-gold/40 transition-[border-color] duration-200">
                   <div className="w-12 h-12 flex items-center justify-center border border-gold/30 bg-gold/10 mb-6">
                     <Icon size={20} className="text-gold" strokeWidth={1.5} />
                   </div>
                   <h3 className="font-display text-2xl text-gold mb-4" style={{ fontWeight: 500 }}>{item.label}</h3>
-                  <p className="font-sans text-white/70 text-base leading-relaxed">{item.text}</p>
+                  <p className="font-sans text-white/70 text-sm leading-relaxed">{item.text}</p>
                 </motion.div>
               );
             })}
@@ -150,7 +150,7 @@ export default function About() {
       </section>
 
       {/* ── Valores ── */}
-      <section className="py-24 md:py-32 bg-ivory">
+      <section className="py-16 md:py-24 bg-ivory">
         <div className="max-w-7xl mx-auto px-5 md:px-10">
           <motion.div ref={refVal}
             initial={{ opacity: 0, y: 24 }}
