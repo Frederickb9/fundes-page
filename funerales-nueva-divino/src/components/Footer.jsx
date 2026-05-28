@@ -1,5 +1,11 @@
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Clock, Globe } from 'lucide-react';
+import { MapPin, Phone, Clock } from 'lucide-react';
+
+const FacebookIcon = ({ size = 16 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+  </svg>
+);
 
 const InstagramIcon = ({ size = 16 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -41,7 +47,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-3">
               {[
-                { Icon: Globe, href: 'https://facebook.com/FuneralesNuevaDivino', label: 'Facebook' },
+                { Icon: FacebookIcon, href: 'https://www.facebook.com/search/top?q=funerales%20nueva%20divino%20el%20salvador', label: 'Facebook' },
                 { Icon: InstagramIcon, href: 'https://instagram.com/n_divinoelsalvador', label: 'Instagram' },
               ].map(({ Icon, href, label }) => (
                 <motion.a key={label} href={href} aria-label={label}
@@ -78,7 +84,7 @@ export default function Footer() {
           <div>
             <h4 className="font-sans text-[10px] tracking-[0.3em] uppercase text-gold font-semibold mb-5">Servicios</h4>
             <ul className="space-y-3">
-              {['Altar Personalizado', 'Velación Completa', 'Staff y Azafatas', 'Transmisión en Vivo', 'Carroza y Cortejo', 'Coffee Break Cementerio', 'Traslados Nacionales', 'Contratos Preventivos'].map((s) => (
+              {['Altar Personalizado', 'Velación Completa', 'Staff y Azafatas', 'Transmisión en Vivo', 'Carroza y Cortejo', 'Coffee Break Cementerio', 'Traslados Nacionales', 'Contratos Preventivos', 'Sala de Velaciones VIP'].map((s) => (
                 <li key={s}>
                   <a href="#servicios" className="font-sans text-xs hover:text-gold transition-colors flex items-center gap-1.5 group">
                     <span className="w-3 h-px bg-gold/30 group-hover:w-5 group-hover:bg-gold transition-[width,background-color] duration-200" />
@@ -107,8 +113,8 @@ export default function Footer() {
                 </div>
               </li>
               <li className="flex items-center gap-3">
-                <Globe size={14} className="text-gold flex-shrink-0" strokeWidth={1.5} />
-                <a href="https://facebook.com/FuneralesNuevaDivino" target="_blank" rel="noopener noreferrer"
+                <span className="text-gold flex-shrink-0"><FacebookIcon size={14} /></span>
+                <a href="https://www.facebook.com/search/top?q=funerales%20nueva%20divino%20el%20salvador" target="_blank" rel="noopener noreferrer"
                   className="font-sans text-xs hover:text-gold transition-colors">
                   Funerales Nueva Divino El Salvador
                 </a>

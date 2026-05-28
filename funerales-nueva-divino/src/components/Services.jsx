@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Flame, Heart, Truck, Shield, Video, Coffee, Church, Users } from 'lucide-react';
+import { Flame, Heart, Truck, Shield, Video, Coffee, Church, Users, Building2 } from 'lucide-react';
 
 const services = [
   {
@@ -45,6 +45,12 @@ const services = [
     title: 'Preparación y Embalsamamiento',
     description: 'Equipo especializado con técnicas modernas que garantizan la presentación digna de su ser querido con el mayor cuidado y respeto profesional.',
     features: ['Técnicos certificados', 'Maquillaje profesional', 'Vestimenta personalizada'],
+  },
+  {
+    icon: Building2,
+    title: 'Sala de Velaciones',
+    description: 'Instalaciones propias diseñadas para brindar confort y seguridad a su familia durante la velación, con todas las comodidades en un ambiente digno y tranquilo.',
+    features: ['Cuarto privado con aire acondicionado', 'Cámaras de videovigilancia 24/7', 'Internet WiFi para la familia'],
   },
   {
     icon: Shield,
