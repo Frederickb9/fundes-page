@@ -27,7 +27,7 @@ export default function Navbar() {
         animate={{ y: 0 }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,backdrop-filter,box-shadow,border-color] duration-300 ${
-          scrolled
+          scrolled || menuOpen
             ? 'bg-white/96 backdrop-blur-md shadow-elegant border-b border-ivory-dark'
             : 'bg-transparent'
         }`}
@@ -39,23 +39,23 @@ export default function Navbar() {
             <motion.a href="#inicio" className="flex items-center gap-3 group" whileHover={{ scale: 1.01 }}>
               <div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center relative">
                 {/* Halo blanco detrás del logo cuando está sobre el Hero oscuro */}
-                {!scrolled && (
+                {!scrolled && !menuOpen && (
                   <div className="absolute inset-0 rounded-full bg-white/15 blur-sm" />
                 )}
                 <img
                   src="/logo.png"
                   alt="Funerales Nueva Divino El Salvador"
                   className={`w-full h-full object-contain relative z-10 transition-[filter] duration-300 ${
-                    scrolled ? 'brightness-75 contrast-110' : 'brightness-110'
+                    scrolled || menuOpen ? 'brightness-75 contrast-110' : 'brightness-110'
                   }`}
                   onError={(e) => { e.target.style.display = 'none'; }}
                 />
               </div>
               <div className="hidden md:block">
-                <p className={`font-display text-lg leading-tight font-semibold transition-colors duration-300 ${scrolled ? 'text-charcoal' : 'text-white drop-shadow'}`}>
+                <p className={`font-display text-lg leading-tight font-semibold transition-colors duration-300 ${scrolled || menuOpen ? 'text-charcoal' : 'text-white drop-shadow'}`}>
                   Funerales Nueva Divino
                 </p>
-                <p className={`font-sans text-xs tracking-[0.2em] uppercase transition-colors duration-300 ${scrolled ? 'text-gold' : 'text-gold-light drop-shadow'}`}>
+                <p className={`font-sans text-xs tracking-[0.2em] uppercase transition-colors duration-300 ${scrolled || menuOpen ? 'text-gold' : 'text-gold-light drop-shadow'}`}>
                   El Salvador
                 </p>
               </div>
@@ -90,7 +90,7 @@ export default function Navbar() {
             {/* Mobile Menu Btn */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className={`md:hidden p-3 transition-colors ${scrolled ? 'text-charcoal' : 'text-white'}`}
+              className={`md:hidden p-3 transition-colors ${scrolled || menuOpen ? 'text-charcoal' : 'text-white'}`}
             >
               <motion.div animate={{ rotate: menuOpen ? 90 : 0 }} transition={{ duration: 0.2 }}>
                 {menuOpen ? <X size={22} /> : <Menu size={22} />}
