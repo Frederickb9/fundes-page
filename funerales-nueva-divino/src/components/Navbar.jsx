@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll } from 'framer-motion';
-import { Menu, X, Phone } from 'lucide-react';
+import { Phone } from 'lucide-react';
 
 const navLinks = [
   { label: 'Inicio', href: '#inicio' },
@@ -9,6 +9,30 @@ const navLinks = [
   { label: 'Nosotros', href: '#nosotros' },
   { label: 'Contacto', href: '#contacto' },
 ];
+
+// Icono animado: 3 líneas → X sin swap de componentes
+function HamburgerIcon({ isOpen }) {
+  const t = { duration: 0.28, ease: [0.16, 1, 0.3, 1] };
+  return (
+    <div className="relative w-5 h-[14px]" aria-hidden="true">
+      <motion.span
+        animate={{ rotate: isOpen ? 45 : 0, y: isOpen ? 7 : 0 }}
+        transition={t}
+        className="absolute top-0 left-0 block w-full h-px bg-current origin-center"
+      />
+      <motion.span
+        animate={{ opacity: isOpen ? 0 : 1 }}
+        transition={{ duration: 0.15 }}
+        className="absolute top-[7px] left-0 block w-full h-px bg-current"
+      />
+      <motion.span
+        animate={{ rotate: isOpen ? -45 : 0, y: isOpen ? -7 : 0 }}
+        transition={t}
+        className="absolute bottom-0 left-0 block w-full h-px bg-current origin-center"
+      />
+    </div>
+  );
+}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -58,12 +82,12 @@ export default function Navbar() {
                 />
               </div>
               <div className="hidden md:block">
-                <p className={`font-display text-lg leading-tight font-semibold transition-colors duration-300 ${
+                <p className={`font-display text-lg leading-tight font-semibold transition-[color] duration-300 ${
                   navScrolled ? 'text-charcoal' : 'text-white drop-shadow'
                 }`}>
                   Funerales Nueva Divino
                 </p>
-                <p className={`font-sans text-xs tracking-[0.2em] uppercase transition-colors duration-300 ${
+                <p className={`font-sans text-xs tracking-[0.2em] uppercase transition-[color] duration-300 ${
                   navScrolled ? 'text-gold' : 'text-gold-light drop-shadow'
                 }`}>
                   El Salvador
@@ -97,76 +121,96 @@ export default function Navbar() {
               </motion.a>
             </div>
 
-            {/* Mobile — botón hamburguesa/X siempre blanco (overlay oscuro detrás) */}
+            {/* Botón hamburguesa — icono animado, touch target 44px */}
             <button
-              onClick={() => setMenuOpen(!menuOpen)}
+              onClick={() => setMenuOpen((v) => !v)}
               aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+              aria-expanded={menuOpen}
               className={`md:hidden p-3 transition-[color] duration-150 ${
                 navScrolled ? 'text-charcoal' : 'text-white'
               }`}
             >
-              <motion.div
-                animate={{ rotate: menuOpen ? 45 : 0, scale: menuOpen ? 1.1 : 1 }}
-                transition={{ duration: 0.2 }}
-              >
-                {menuOpen ? <X size={22} /> : <Menu size={22} />}
-              </motion.div>
+              <HamburgerIcon isOpen={menuOpen} />
             </button>
           </div>
         </div>
       </motion.nav>
 
-      {/* Overlay full-screen — navy oscuro, debajo del nav */}
+      {/* Overlay full-screen */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
             key="mobile-menu"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0, scale: 0.99 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.99 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-40 bg-navy/[0.97] backdrop-blur-sm flex flex-col md:hidden"
+            className="fixed inset-0 z-40 flex flex-col md:hidden overflow-hidden"
           >
-            {/* Línea dorada superior */}
-            <div className="absolute top-0 left-0 right-0 h-0.5 bg-gold-gradient opacity-80" />
+            {/* Fondo base */}
+            <div className="absolute inset-0 bg-navy" />
 
-            {/* Espacio para el navbar */}
-            <div className="h-20" />
+            {/* Brillo radial dorado — esquina inferior izquierda */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{ background: 'radial-gradient(ellipse 70% 45% at 0% 100%, rgba(201,150,60,0.07) 0%, transparent 65%)' }}
+            />
 
-            {/* Links principales */}
-            <nav className="flex-1 flex flex-col justify-center px-8 gap-0">
+            {/* Textura dorada — misma del Hero, muy sutil */}
+            <div
+              className="absolute inset-0 opacity-[0.04] pointer-events-none"
+              style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9963C' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }}
+            />
+
+            {/* Spacer para el navbar */}
+            <div className="h-20 shrink-0" />
+
+            {/* Links con numeración */}
+            <nav
+              className="relative flex-1 flex flex-col justify-center px-8"
+              aria-label="Navegación móvil"
+            >
               {navLinks.map((link, i) => (
                 <motion.a
                   key={link.href}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.07 + 0.05, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  className="font-display text-3xl text-white/85 hover:text-gold-light transition-[color] duration-150 py-4 border-b border-white/[0.08] leading-tight"
-                  whileTap={{ scale: 0.98 }}
+                  transition={{
+                    delay: i * 0.06 + 0.18,
+                    duration: 0.45,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  className="group flex items-baseline gap-4 py-[14px] border-b border-white/[0.07]"
+                  whileTap={{ scale: 0.98, transition: { duration: 0.1 } }}
                 >
-                  {link.label}
+                  <span className="font-sans text-[10px] text-white/20 tracking-wider tabular-nums w-5 shrink-0 leading-none">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span className="font-display text-[1.75rem] leading-tight text-white/90 group-hover:text-gold-light transition-[color] duration-150">
+                    {link.label}
+                  </span>
                 </motion.a>
               ))}
             </nav>
 
-            {/* Pie del overlay: teléfono + tagline */}
+            {/* Pie: teléfono + tagline */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.45, duration: 0.4 }}
-              className="px-8 pb-12 flex flex-col gap-3"
+              transition={{ delay: 0.55, duration: 0.4 }}
+              className="relative px-8 pb-12 flex flex-col gap-2"
             >
-              <div className="h-px bg-white/10 mb-2" />
+              <div className="h-px bg-white/10 mb-3" />
               <a
                 href="tel:+50374779220"
-                className="flex items-center gap-3 text-gold-light font-sans text-sm tracking-wider"
+                className="flex items-center gap-3 text-gold-light font-sans text-sm tracking-wider py-3 min-h-[44px]"
               >
                 <Phone size={14} />
                 7477-9220 / 6174-2807
               </a>
-              <p className="font-sans text-white/30 text-[10px] tracking-[0.25em] uppercase">
+              <p className="font-sans text-white/25 text-[10px] tracking-[0.25em] uppercase">
                 Desde 1979 · La Unión, El Salvador
               </p>
             </motion.div>
