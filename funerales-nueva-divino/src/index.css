@@ -87,3 +87,7 @@
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #F8F5EE; }
 ::-webkit-scrollbar-thumb { background: #C9963C; border-radius: 3px; }
+
+/* Carousel: hide scrollbar */
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
