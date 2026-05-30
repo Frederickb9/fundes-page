@@ -76,7 +76,7 @@ const services = [
 function ServiceCard({ service }) {
   const Icon = service.icon;
   return (
-    <article className="flex-none w-[285px] md:w-[360px] bg-white border border-ivory-dark overflow-hidden group snap-start cursor-default select-none">
+    <article className="flex-none w-[285px] md:w-[360px] bg-white border border-ivory-dark overflow-hidden group snap-start flex flex-col">
       {/* Image */}
       <div className="relative h-[190px] md:h-[220px] overflow-hidden">
         <img
@@ -96,14 +96,14 @@ function ServiceCard({ service }) {
       <div className="h-px w-full bg-gold-gradient origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
 
       {/* Body */}
-      <div className="p-5 md:p-6">
+      <div className="p-5 md:p-6 flex flex-col flex-1">
         <h3 className="font-display text-lg md:text-xl text-charcoal mb-2 leading-snug group-hover:text-gold transition-colors duration-200">
           {service.title}
         </h3>
         <p className="font-sans text-slate-warm text-sm leading-relaxed mb-4">
           {service.description}
         </p>
-        <ul className="space-y-1.5">
+        <ul className="space-y-1.5 mb-5">
           {service.features.map((f) => (
             <li key={f} className="flex items-center gap-2 font-sans text-xs text-slate-warm">
               <span className="w-1 h-1 rounded-full bg-gold flex-shrink-0" />
@@ -111,6 +111,14 @@ function ServiceCard({ service }) {
             </li>
           ))}
         </ul>
+        <a
+          href={`https://wa.me/50374779220?text=${encodeURIComponent(`Hola, deseo información sobre el servicio: ${service.title}.`)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-auto block text-center font-sans text-[10px] tracking-[0.2em] uppercase font-semibold py-2.5 border border-gold/40 text-gold hover:bg-gold hover:text-white transition-colors duration-200"
+        >
+          Consultar Servicio
+        </a>
       </div>
     </article>
   );

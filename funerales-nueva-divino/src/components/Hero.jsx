@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { motion, useMotionValue, useTransform, animate, useInView } from 'framer-motion';
-import { Phone, ChevronDown } from 'lucide-react';
+import { Phone } from 'lucide-react';
 
 function Counter({ to, suffix = '', delay = 0 }) {
   const ref = useRef(null);
@@ -35,7 +35,7 @@ const fadeUp = {
 
 export default function Hero() {
   return (
-    <section id="inicio" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-navy">
+    <section id="inicio" className="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden bg-navy">
 
       {/* Imagen de fondo */}
       <div className="absolute inset-0 overflow-hidden">
@@ -125,7 +125,7 @@ export default function Hero() {
           {[
             { to: 40, suffix: '+', label: 'Años de Experiencia', delay: 0.6 },
             { to: 24, suffix: '/7', label: 'Atención Disponible', delay: 0.75 },
-            { to: 100, suffix: '%', label: 'Compromiso Familiar', delay: 0.9 },
+            { to: 365, suffix: '', label: 'Días al Año', delay: 0.9 },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
               <p className="font-display text-2xl md:text-3xl text-gold-light font-semibold">
@@ -137,14 +137,6 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 0.4 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-        <span className="font-sans text-white/30 text-[10px] tracking-[0.3em] uppercase">Desplazar</span>
-        <motion.div animate={{ y: [0, 6, 0] }} transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          className="text-gold/50">
-          <ChevronDown size={18} />
-        </motion.div>
-      </motion.div>
     </section>
   );
 }

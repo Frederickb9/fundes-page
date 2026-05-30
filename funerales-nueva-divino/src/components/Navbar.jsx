@@ -76,7 +76,7 @@ export default function Navbar() {
                   src="/logo.png"
                   alt="Funerales Nueva Divino El Salvador"
                   className={`w-full h-full object-contain relative z-10 transition-[filter] duration-300 ${
-                    navScrolled ? 'brightness-75 contrast-110' : 'brightness-110'
+                    navScrolled ? 'brightness-75 contrast-125' : 'brightness-110'
                   }`}
                   onError={(e) => { e.target.style.display = 'none'; }}
                 />
@@ -182,12 +182,9 @@ export default function Navbar() {
                     duration: 0.45,
                     ease: [0.16, 1, 0.3, 1],
                   }}
-                  className="group flex items-baseline gap-4 py-[14px] border-b border-white/[0.07]"
+                  className="group flex items-center py-[14px] border-b border-white/[0.07]"
                   whileTap={{ scale: 0.98, transition: { duration: 0.1 } }}
                 >
-                  <span className="font-sans text-[10px] text-white/20 tracking-wider tabular-nums w-5 shrink-0 leading-none">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
                   <span className="font-display text-[1.75rem] leading-tight text-white/90 group-hover:text-gold-light transition-[color] duration-150">
                     {link.label}
                   </span>

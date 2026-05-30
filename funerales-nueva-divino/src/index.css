@@ -31,8 +31,8 @@
   .btn-gold {
     @apply bg-gold-gradient text-white font-sans font-semibold px-8 py-3 rounded-none
            tracking-widest uppercase text-xs
-           transition-[box-shadow,transform] duration-200
-           hover:shadow-gold-lg hover:scale-105;
+           transition-[box-shadow] duration-200
+           hover:shadow-gold-lg;
   }
 
   .btn-outline-gold {

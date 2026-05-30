@@ -17,7 +17,7 @@ const plans = [
     subtitle: 'Dignidad esencial',
     price: '$850',
     period: 'pago único',
-    color: '#8B9DB8',
+    color: '#A07828',
     featured: false,
     benefits: [
       'Ataúd de madera sencillo',
@@ -34,7 +34,7 @@ const plans = [
     subtitle: 'Consuelo para su familia',
     price: '$1,200',
     period: 'pago único',
-    color: '#7FA99E',
+    color: '#A07828',
     featured: false,
     benefits: [
       'Ataúd de madera reforzada',
@@ -72,7 +72,7 @@ const plans = [
     subtitle: 'Un adiós memorable',
     price: '$3,200',
     period: 'pago único',
-    color: '#B8860B',
+    color: '#C9963C',
     featured: false,
     benefits: [
       'Ataúd de cedro premium reforzado',
@@ -92,7 +92,7 @@ const plans = [
     subtitle: 'La máxima distinción',
     price: '$5,500',
     period: 'pago único',
-    color: '#8B5E3C',
+    color: '#B8860B',
     featured: false,
     badge: 'Premium',
     benefits: [
@@ -115,7 +115,7 @@ const plans = [
     subtitle: 'Sin comparación',
     price: '$8,500',
     period: 'pago único',
-    color: '#6B3F2E',
+    color: '#B8860B',
     featured: false,
     badge: 'Exclusivo',
     benefits: [
@@ -260,7 +260,6 @@ export default function MobileCatalog() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-12 md:mb-16"
         >
-          <p className="section-tag mb-4">Nuestros Planes</p>
           <h2 className="font-display text-4xl md:text-5xl text-charcoal mb-4" style={{ fontWeight: 400 }}>
             Planes a la medida
             <br />
@@ -321,34 +320,25 @@ export default function MobileCatalog() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.5, duration: 0.8 }}
-          className="text-center mt-16 p-10 bg-navy relative overflow-hidden"
+          className="text-center mt-16 p-10 bg-ivory-dark border border-gold/30"
         >
-          <div
-            className="absolute inset-0 opacity-5"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C9963C' fill-opacity='1'%3E%3Cpath d='M20 18v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4z'/%3E%3C/g%3E%3C/svg%3E")`,
-            }}
-          />
-          <div className="relative z-10">
-            <p className="font-sans text-gold text-xs tracking-[0.3em] uppercase mb-3">¿Necesita orientación?</p>
-            <h3 className="font-display text-2xl md:text-3xl text-white mb-4" style={{ fontWeight: 400 }}>
-              Le asesoramos sin ningún compromiso
-            </h3>
-            <p className="font-sans text-white/60 text-sm mb-8 max-w-lg mx-auto">
-              Nuestros asesores están disponibles las 24 horas para ayudarle a encontrar
-              el plan que mejor se adapte a sus necesidades y presupuesto.
-            </p>
-            <motion.a
-              href="https://wa.me/50374779220?text=Hola,%20deseo%20información%20sobre%20sus%20planes%20funerarios."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-gold inline-flex items-center gap-2"
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              Asesoría gratuita por WhatsApp
-            </motion.a>
-          </div>
+          <h3 className="font-display text-2xl md:text-3xl text-charcoal mb-4" style={{ fontWeight: 400 }}>
+            Le asesoramos sin ningún compromiso
+          </h3>
+          <p className="font-sans text-slate-warm text-sm mb-8 max-w-lg mx-auto">
+            Nuestros asesores están disponibles las 24 horas para ayudarle a encontrar
+            el plan que mejor se adapte a sus necesidades y presupuesto.
+          </p>
+          <motion.a
+            href="https://wa.me/50374779220?text=Hola,%20deseo%20información%20sobre%20sus%20planes%20funerarios."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-gold inline-flex items-center gap-2"
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.97 }}
+          >
+            Asesoría gratuita por WhatsApp
+          </motion.a>
         </motion.div>
       </div>
     </section>

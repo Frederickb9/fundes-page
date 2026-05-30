@@ -3,12 +3,12 @@ import { motion, useInView } from 'framer-motion';
 import { Award, Clock, Users, MapPin, Heart, Handshake, Eye, Target } from 'lucide-react';
 
 const valores = [
-  { num: '01', title: 'Honradez', desc: 'Ofrecemos productos y servicios de calidad siendo transparentes y sinceros en la prestación de nuestros servicios.' },
-  { num: '02', title: 'Solidaridad', desc: 'Nos prestamos y apoyamos en esa situación tan difícil, trabajando en equipo a través de la ayuda mutua.' },
-  { num: '03', title: 'Atención', desc: 'Somos cuidadosos y aplicados en el trato con nuestros clientes, demostrando respeto y cortesía en todo momento.' },
-  { num: '04', title: 'Respeto', desc: 'Mostramos consideración y reconocimiento del valor de nuestros clientes, atendiéndolos con cortesía y educación.' },
-  { num: '05', title: 'Humildad', desc: 'No obramos con orgullo; somos capaces de reconocer nuestras propias limitaciones para mejorar cada día.' },
-  { num: '06', title: 'Responsabilidad', desc: 'Con sentido y conciencia cumplimos nuestros compromisos para generar confianza en nuestros clientes.' },
+  { icon: Award, title: 'Honradez', desc: 'Ofrecemos productos y servicios de calidad siendo transparentes y sinceros en la prestación de nuestros servicios.' },
+  { icon: Handshake, title: 'Solidaridad', desc: 'Nos prestamos y apoyamos en esa situación tan difícil, trabajando en equipo a través de la ayuda mutua.' },
+  { icon: Heart, title: 'Atención', desc: 'Somos cuidadosos y aplicados en el trato con nuestros clientes, demostrando respeto y cortesía en todo momento.' },
+  { icon: Users, title: 'Respeto', desc: 'Mostramos consideración y reconocimiento del valor de nuestros clientes, atendiéndolos con cortesía y educación.' },
+  { icon: Eye, title: 'Humildad', desc: 'No obramos con orgullo; somos capaces de reconocer nuestras propias limitaciones para mejorar cada día.' },
+  { icon: Target, title: 'Responsabilidad', desc: 'Con sentido y conciencia cumplimos nuestros compromisos para generar confianza en nuestros clientes.' },
 ];
 
 export default function About() {
@@ -97,9 +97,7 @@ export default function About() {
       </section>
 
       {/* ── Misión y Visión ── */}
-      <section className="py-16 md:py-24 bg-navy relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.04] pointer-events-none"
-          style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C9963C' fill-opacity='1'%3E%3Cpath d='M20 18v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4z'/%3E%3C/g%3E%3C/svg%3E")` }} />
+      <section className="py-16 md:py-24 bg-gradient-to-br from-navy to-charcoal relative overflow-hidden">
         <div className="h-0.5 bg-gold-gradient absolute top-0 left-0 right-0" />
 
         <div className="max-w-7xl mx-auto px-5 md:px-10 relative z-10">
@@ -108,7 +106,6 @@ export default function About() {
             animate={isMVInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
             className="text-center mb-16">
-            <p className="section-tag text-gold mb-4">Quiénes Somos</p>
             <h2 className="font-display text-4xl md:text-5xl text-white mb-4" style={{ fontWeight: 400 }}>
               Nuestra <em className="text-gold" style={{ fontStyle: 'italic', fontWeight: 500 }}>Misión y Visión</em>
             </h2>
@@ -157,7 +154,6 @@ export default function About() {
             animate={isValInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
             className="text-center mb-16">
-            <p className="section-tag mb-4">Lo que nos define</p>
             <h2 className="font-display text-4xl md:text-5xl text-charcoal mb-4" style={{ fontWeight: 400 }}>
               Nuestros <em className="text-gold" style={{ fontStyle: 'italic', fontWeight: 500 }}>Valores</em>
             </h2>
@@ -168,23 +164,28 @@ export default function About() {
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {valores.map((v, i) => (
-              <motion.div key={v.title}
-                initial={{ opacity: 0, y: 28 }}
-                animate={isValInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: i * 0.08, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ y: -5, transition: { type: 'spring', stiffness: 320, damping: 22 } }}
-                className="bg-white border border-ivory-dark p-8 group hover:shadow-gold-sm transition-[box-shadow] duration-300">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="font-display text-4xl text-gold/20 font-semibold leading-none">{v.num}</span>
-                  <h4 className="font-display text-xl text-charcoal group-hover:text-gold transition-colors duration-300" style={{ fontWeight: 500 }}>
-                    {v.title}
-                  </h4>
-                </div>
-                <div className="h-px bg-gold/20 mb-4 group-hover:bg-gold/50 transition-colors duration-300" />
-                <p className="font-sans text-slate-warm text-sm leading-relaxed">{v.desc}</p>
-              </motion.div>
-            ))}
+            {valores.map((v, i) => {
+              const Icon = v.icon;
+              return (
+                <motion.div key={v.title}
+                  initial={{ opacity: 0, y: 28 }}
+                  animate={isValInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: i * 0.08, duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                  whileHover={{ y: -5, transition: { type: 'spring', stiffness: 320, damping: 22 } }}
+                  className="bg-white border border-ivory-dark p-8 group hover:shadow-gold-sm transition-[box-shadow] duration-300">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-9 h-9 flex items-center justify-center border border-gold/30 bg-gold/5 group-hover:bg-gold/10 transition-colors flex-shrink-0">
+                      <Icon size={16} className="text-gold" strokeWidth={1.5} />
+                    </div>
+                    <h4 className="font-display text-xl text-charcoal group-hover:text-gold transition-colors duration-300" style={{ fontWeight: 500 }}>
+                      {v.title}
+                    </h4>
+                  </div>
+                  <div className="h-px bg-gold/20 mb-4 group-hover:bg-gold/50 transition-colors duration-300" />
+                  <p className="font-sans text-slate-warm text-sm leading-relaxed">{v.desc}</p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
